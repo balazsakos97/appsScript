@@ -1,0 +1,36 @@
+<script>
+  
+    document.getElementById('refreshbtn').addEventListener("click",doStuff);
+  
+    function updateSection(data) {
+      document.getElementById("change").innerHTML = data;
+      document.getElementById('loading').innerHTML = '';
+    };
+  
+    function updateDropDownCountry(list) {
+      document.getElementById("country").innerHTML = list;
+    };
+  
+    function updateDropDownVertical(list) {
+      document.getElementById("vertical").innerHTML = list;
+    };
+  
+    function updateDropDownTeam(list) {
+      document.getElementById("team").innerHTML = list;
+    };
+  
+    function doStuff() {
+      var country = document.getElementById('country').value;
+      var team = document.getElementById('team').value;
+      var vertical = document.getElementById('vertical').value;
+  
+      google.script.run.withSuccessHandler(updateSection)
+            .returnData(country, team, vertical);
+  
+      document.getElementById('loading').innerHTML = '<img src="#" width="25" height="25">';   
+    };
+  
+    google.script.run.withSuccessHandler(updateDropDownCountry).dropDownOptionsCountry();
+    google.script.run.withSuccessHandler(updateDropDownTeam).dropDownOptionsTeam();
+    google.script.run.withSuccessHandler(updateDropDownVertical).dropDownOptionsVertical();
+</script>
